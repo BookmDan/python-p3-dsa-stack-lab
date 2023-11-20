@@ -1,7 +1,8 @@
 class Stack:
 
     def __init__(self, items = [], limit = 100):
-        pass
+        self.items = items if items is not None else []
+        self.limit = limit
 
     def isEmpty(self):
         return len(self.items) == 0
@@ -10,16 +11,16 @@ class Stack:
         if self.limit is None or len(self.items) < self.limit:
             self.items.append(item)
         else:
-            raise ValueError("Stack is full")
+            return None
 
     def pop(self):
-        if not self.is_empty():
+        if not self.isEmpty():
             return self.items.pop()
         else:
-            raise IndexError("Pop from an empty stack")
+            return None
 
     def peek(self):
-        if not self.is_empty():
+        if not self.isEmpty():
             return self.items[-1]
         else:
             return None
@@ -33,7 +34,7 @@ class Stack:
 
     def search(self, target):
         try:
-            index = self.items.index(value)
+            index = self.items.index(target)
             return len(self.items) - 1 - index
         except ValueError:
             return -1
